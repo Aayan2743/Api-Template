@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use App\Models\setting;
 
-class checkTwoStepVerification
+class Mgs91access
 {
     /**
      * Handle an incoming request.
@@ -19,14 +19,10 @@ class checkTwoStepVerification
     {
         try{
            
-        
-         
-             
-
-            if(setting::where("id",1)->value('status')==0) {
+            if(setting::where("id",2)->value('status')==0) {
                 return response()->json([
                  "status"=> false,
-                 'message'=>'Two Step Verification Not Enabled'
+                 'message'=>'Mgs91 Not Enabled'
                 ]);
              }
                                             
@@ -39,6 +35,6 @@ class checkTwoStepVerification
                 'message'=>$e->getMessage()
                ]); 
         }
-        
-    }   
+
+    }
 }

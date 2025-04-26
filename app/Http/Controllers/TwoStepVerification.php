@@ -25,14 +25,14 @@ class TwoStepVerification extends Controller
                             try{
             
                                 $email=Auth()->user()->email;
-
+                              
                                 if($email==null){
                                     return response()->json([
                                                 'status'=>false,
                                                 'message'=>'Email id Not Created'
                                             ]);
                                 }
-                                // dd($email);
+                               //  dd($email);
                                 $otp = rand(100000, 999999); 
             
                              

@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use App\Models\setting;
 
-class checkTwoStepVerification
+class RozarPayAddOn
 {
     /**
      * Handle an incoming request.
@@ -19,14 +19,10 @@ class checkTwoStepVerification
     {
         try{
            
-        
-         
-             
-
-            if(setting::where("id",1)->value('status')==0) {
+            if(setting::where("id",3)->value('status')==0) {
                 return response()->json([
                  "status"=> false,
-                 'message'=>'Two Step Verification Not Enabled'
+                 'message'=>'Rozarpay Not Enabled'
                 ]);
              }
                                             
@@ -38,7 +34,7 @@ class checkTwoStepVerification
                 "status"=> false,
                 'message'=>$e->getMessage()
                ]); 
-        }
-        
-    }   
+        } 
+
+    }
 }

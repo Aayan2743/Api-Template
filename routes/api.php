@@ -8,6 +8,7 @@ use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\buildingController;
 use App\Http\Controllers\TwoStepVerification;
 use App\Http\Controllers\Mgs91Controller;
+use App\Http\Controllers\RozarpayController;
 
 
 /*
@@ -58,8 +59,13 @@ Route::group(['middleware'=>'jwt.verify'],function($routes){
     Route::post('/verify_email',[TwoStepVerification::class,'verifyEmail'])->middleware('EmailTwoStepVerification');
 
     // Message OTP Flow
-    Route::post('/Send-Otp',[Mgs91Controller::class,'SendOtp']);
-    Route::post('/Verify-Otp',[Mgs91Controller::class,'VerifyOtp']);
+    Route::post('/Send-Otp',[Mgs91Controller::class,'SendOtp'])->middleware('Mgs91access');
+    Route::post('/Verify-Otp',[Mgs91Controller::class,'VerifyOtp'])->middleware('Mgs91access');
+
+
 
 });
 
+    // rozarpay Flow
+    Route::post('/createOrder',[RozarpayController::class,'createOrder'])->middleware('RozarPayAddOn');
+    Route::post('/verifyPayment',[RozarpayController::class,'verifyPayment'])->middleware('RozarPayAddOn');

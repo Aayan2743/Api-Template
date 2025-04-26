@@ -64,7 +64,9 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'jwt.verify' => \App\Http\Middleware\JWTMiddleware::class,  // jwt middleware
-        'EmailTwoStepVerification' => \App\Http\Middleware\checkTwoStepVerification::class,  // jwt middleware
+        'EmailTwoStepVerification' => \App\Http\Middleware\checkTwoStepVerification::class,  // add on for email two step verification
+        'Mgs91access' => \App\Http\Middleware\Mgs91access::class,  // Msg91 Access
+        'RozarPayAddOn' => \App\Http\Middleware\RozarPayAddOn::class,  //  RozarPayAddOn Access
 
     ];
 }
