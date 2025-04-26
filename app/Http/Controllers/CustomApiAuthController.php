@@ -187,7 +187,7 @@ class CustomApiAuthController extends Controller
                         'user_data'=>$emailCheck,
                         'otp'=>$otp,
                         'exp'=>Carbon::now()->addMinutes(5),
-                        'subject' => 'OTP for Verification - ' . now()->format('H:i:s'),
+                        'subject' => 'OTP for Verification',
                     ];
                     Mail::to($request->email)->send(new SendOtp($data));
 

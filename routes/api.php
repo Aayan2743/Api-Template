@@ -1,11 +1,13 @@
 <?php
 
+use App\Mail\SendOtp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomApiAuthController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\buildingController;
 use App\Http\Controllers\TwoStepVerification;
+use App\Http\Controllers\Mgs91Controller;
 
 
 /*
@@ -52,8 +54,12 @@ Route::group(['middleware'=>'jwt.verify'],function($routes){
 
 
     // 2 step factor verify email or update R & D later 
-    Route::post('/send_verification_code',[TwoStepVerification::class,'send_verification_code']);
-    Route::post('/verify_email',[TwoStepVerification::class,'verifyEmail']);
+    Route::post('/send_verification_code',[TwoStepVerification::class,'send_verification_code'])->middleware('EmailTwoStepVerification');
+    Route::post('/verify_email',[TwoStepVerification::class,'verifyEmail'])->middleware('EmailTwoStepVerification');
+
+    // Message OTP Flow
+    Route::post('/Send-Otp',[Mgs91Controller::class,'SendOtp']);
+    Route::post('/Verify-Otp',[Mgs91Controller::class,'VerifyOtp']);
 
 });
 

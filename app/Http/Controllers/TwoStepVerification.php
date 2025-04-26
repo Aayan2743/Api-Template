@@ -20,38 +20,9 @@ class TwoStepVerification extends Controller
 
         public function send_verification_code(Request $request)
         {
-                      
-                        //  $validator=validator::make(request()->all(), [
-                        //         // 'email'=>'required|email'
-                        //     ]);
-            
-                        //     if ($validator->fails()) {
-                        //         return response()->json([
-                        //             'status'=>false,
-                        //             'message'=> $validator->errors()->first(),
-                        //         ],200);
-                        //     }
+                     
             
                             try{
-            
-                          
-            
-                            // $emailCheck=user::where('email','=', $request->email)
-                            // ->first();
-            
-                            // if(!$emailCheck){
-                            //     return response()->json([
-                            //         'status'=>false,
-                            //         'message'=>'Email id Not Registered'
-                            //     ]);
-                            // }
-            
-                            // if($emailCheck->deleted_at==1){
-                            //     return response()->json([
-                            //         'status'=>false,
-                            //         'message'=>'Email id deleted'
-                            //     ]);
-                            // }
             
                                 $email=Auth()->user()->email;
 
@@ -71,11 +42,15 @@ class TwoStepVerification extends Controller
                                     'expired_time'=>Carbon::now()->addMinutes(5),
                                 ]);
                 
+
                                 $data=[
+                                    'user_data'=>Auth()->user(),
                                     'otp'=>$otp,
                                     'exp'=>Carbon::now()->addMinutes(5),
+                                    'subject' => 'Two-Factor Authentication',
                                 ];
-                                $mailed=Mail::to($email)->send(new SendOtp($data));
+                                Mail::to($email)->send(new SendOtp($data));
+
                               
                                 return response()->json([
                                     'status'=>true,

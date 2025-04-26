@@ -34,7 +34,7 @@ class SendOtp extends Mailable implements ShouldQueue
     public function envelope()
     {
         return new Envelope(
-            subject: 'OTP for Verification',
+            subject:  $this->data['subject'] ??'OTP for Verification sddddd',
         );
     }
 
